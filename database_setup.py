@@ -1,25 +1,25 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, ForeignKeyConstraint
 
 Base = declarative_base()
 
-class user(Base):
-    __tablename__ = 'User'
-    id = Column(Integer, primary-key=True)
+class User(Base):
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
     email = Column(String(250))  # should be unique
 
 class Contact(Base):
     __tablename__ = 'Contact'
-    contactId = Column(Integer, primary-key=True)
-    UserId = Column(Integer, foreign-key) #
+    contactId = Column(Integer, primary_key=True)
+    UserId = Column(Integer, ForeignKey('user.id')) #
     name = Column(String)
     phoneNumber = Column(String(20))
     address = Column(String(250))
     email = Column(String(250))
-    __table_args__ = (ForeignKeyConstraint([Userid],['user.id']), {})
+    __table_args__ = (ForeignKeyConstraint([UserId],['user.id']), {})
     @property
     def serialize(self):
         return {
@@ -31,7 +31,7 @@ class Contact(Base):
         }
 
 
-engine = create_engine('sqlite:///phonebook.db')
-base.metadata.bind = engine
-DB = sessinomaker(bind=engine)
-session = DB()
+#engine = create_engine('sqlite:///phonebook.db')
+#Base.metadata.bind = engine
+#DB = sessionmaker(bind=engine)
+#session = DB()
