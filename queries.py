@@ -9,14 +9,18 @@ DB = sessionmaker(bind=engine)
 Base.metadata.create_all()
 session = DB()
 
+# rewrite functions to work with string or a dict
 
 def register_user(login):
-    if login['name'] != None:
-        newUser = User(name = login['name'], email = login['email'])
-        session.add(newUser)
-        session.commit()
-        user = session.query(User).filter_by(email=login['email']).one()
-        return user.id
+    if type(login) == dict:
+        if login['name'] != None and login['name'] != "":
+            newUser = User(name = login['name'], email = login['email'])
+            session.add(newUser)
+            session.commit()
+            user = session.query(User).filter_by(email=login['email']).one()
+            return user.id
+        else:
+            return None
     else:
         return None
 

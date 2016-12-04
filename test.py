@@ -24,9 +24,10 @@ class testQueries(unittest.TestCase):
         queries.delete_User('Marc')
         login['name'] = None
         self.assertFalse(queries.register_user(login))
-        """
-        self.assertFalse(queries.register_user(""))
-        self.assertFalse(quericdes.register_user(" "))
+        login['name'] = ""
+        self.assertFalse(queries.register_user(login))
+        login['name'] = " "
+        self.assertFalse(queries.register_user(login))
         self.assertFalse(queries.register_user("Marc"))
         self.assertFalse(queries.register_user())
         
@@ -39,17 +40,39 @@ class testQueries(unittest.TestCase):
         self.assertFalse(queries.get_user_by_email("dfasdjkflhkjdd@dsakfjdnetcom"))  # test to make sure email contains either .net or .com
 
     def test_create_contact(self):
-    	self.assertTrue(queries.add_contact("Marc", "marc@marc.com"))
-    	self.assertFalse(queries.add_contact(None))
-    	self.assertFalse(queries.add_contact(" "))
-    	self.assertFalse(queries.add_contact(" ", " "))
-    	self.assertFalse(queries.add_contact(""))
-    	self.assertFalse(queries.add_contact("", ""))
-        self.assertFalse(queries.add_contact())
+        contact = {'name':'', 'email':'','address':'', 'phone':''}
+    	self.assertFalse(queries.create_contact(contact))
+    	self.assertFalse(queries.create_contact(None))
+        """
+        # test if name only
+        contact['name'] = 'Bert'
+    	self.assertFalse(queries.create_contact(contact))
+        # email only
+        contact['name'] = ""
+        contact['email'] = "jdkflahd@djflskdf.com"
+    	self.assertFalse(queries.create_contact(contact))
+    	# address only
+        contact['email'] = ""
+        contact['address'] = "123 easy street wealth OK'
+        self.assertFalse(queries.create_contact(contact))
+    	# phone only
+        contact['address'] = ""
+        contact['phone'] =  "99999999999"
+        self.assertFalse(queries.create_contact(contact))
+        #more than one field filled in
+        contact['name'] = "Bob"
+        contact['email'] = "uiouepi@uoiupe"
+        self.assertEqual(queries.create_contact(contact))
+        delete_contact('Bob')
+        """
 
     def test_delete_contact(self):
-    	self.assertTrue(queries.add_contact(""))
-        pass
+        contact = {'name':'Bob', 'phone':'99999999999'}
+        queries.create_contact(contact)
+    	self.assertTrue(queries.delete_contact(""))
+        self.assertEqual(queries.delete_contact(None))
+        self.assertEqual(queries.delete_contact(contact['name']), "Contact deleted")
+        self.assertEqual(queries.delete_contact('Joe'), "Contact not found")
 
     def test_edit_contact(self):
         pass
@@ -69,7 +92,6 @@ class testQueries(unittest.TestCase):
 
     def test_get_users_contacts(self):
     	pass
-    """
 
     def test_delete_user(self):
         self.assertEqual(queries.delete_User(None), None)
