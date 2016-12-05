@@ -14,11 +14,17 @@ session = DB()
 def register_user(login):
     if type(login) == dict:
         if login['name'] != None and login['name'] != "":
-            newUser = User(name = login['name'], email = login['email'])
-            session.add(newUser)
-            session.commit()
-            user = session.query(User).filter_by(email=login['email']).one()
-            return user.id
+            try:
+                checkUsername = session.query(User).filter_by(name = login['name']).one()
+            except:
+                newUser = User(name = login['name'], email = login['email'])
+                session.add(newUser)
+                session.commit()
+                user = session.query(User).filter_by(name=login['name']).one()
+                print user
+                return user
+            else:
+                return "Username already in use."
         else:
             return None
     else:
@@ -44,7 +50,7 @@ def get_user_by_email(email):
         return user
 
 def delete_User(userName):
-    if userName != None:
+    if userName:
         try:
             user = session.query(User).filter_by(name = userName).one()
             session.delete(user)
@@ -55,27 +61,29 @@ def delete_User(userName):
     else:
         return None
 
-def create_contact():
+def create_contact(contact):
     pass
 
-def edit_contact():
+def edit_contact(contactName):
     pass
 
-def delete_contact():
+def delete_contact(contactName):
     pass
 
-def get_users_contacts():
+def get_users_contacts(user):
     pass
 
-def find_contact_by_email():
+def find_contact_by_email(email):
     pass
 
-def find_contact_by_address():
+def find_contact_by_address(address):
     pass
 
-def find_contact_by_name():
+def find_contact_by_name(contact):
     pass
 
-def find_contact_by_phoneNumber():
+def find_contact_by_phoneNumber(phone):
     pass
 
+delete_User(" ")
+delete_User("  ")
