@@ -41,33 +41,33 @@ class testQueries(unittest.TestCase):
                          "fjsakjfhkjadflajfdhakjdfl"))  # test to make sure email contains@
         self.assertFalse(queries.get_user_by_email(
                          "dfasdjkflhkjdd@dsakfjdnetcom"))  # test to make sure email contains either .net or .com
-
+    """
     def test_create_contact(self):
         # rewrite to so only having one field filled will pass
         contact = {'name':'', 'email':'','address':'', 'phone':''}
-    	self.assertFalse(queries.create_contact(contact))
+    	self.assertEqual(queries.create_contact(contact), "Invalid input")
     	self.assertFalse(queries.create_contact(None))
         # test if name only
         contact['name'] = 'Bert'
-    	self.assertFalse(queries.create_contact(contact))
+    	self.assertTrue(queries.create_contact(contact))
         # email only
         contact['name'] = ""
         contact['email'] = "jdkflahd@djflskdf.com"
-    	self.assertFalse(queries.create_contact(contact))
+    	self.assertEqual(queries.create_contact(contact), "Invalid input")
     	# address only
         contact['email'] = ""
         contact['address'] = "123 easy street wealth OK"
-        self.assertFalse(queries.create_contact(contact))
+        self.assertEqual(queries.create_contact(contact), "Invalid input")
     	# phone only
         contact['address'] = ""
         contact['phone'] =  "99999999999"
-        self.assertFalse(queries.create_contact(contact))
+        self.assertEqual(queries.create_contact(contact), "Invalid input")
         #more than one field filled in
         contact['name'] = "Bob"
         contact['email'] = "uiouepi@uoiupe"
-        self.assertEqual(queries.create_contact(contact), "Contact created")
+        self.assertEqual(queries.create_contact(contact), "Contact created.")
         delete_contact('Bob')
-
+    """
     def test_delete_contact(self):
         contact = {'name':'Bob', 'phone':'99999999999'}
         queries.create_contact(contact)
