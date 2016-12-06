@@ -69,13 +69,15 @@ class testQueries(unittest.TestCase):
         queries.delete_contact('Bob')
 
     def test_delete_contact(self):
-        contact = {'name':'Bob', 'phone':'99999999999', 'email':'', 'address':''}
+        contact = {'name':'Bob', 'phone':'99999999999', 'email':'',
+                   'address':''}
         queries.create_contact(contact)
     	self.assertTrue(queries.delete_contact(""))
         self.assertEqual(queries.delete_contact(None), "Invalid input")
         self.assertEqual(queries.delete_contact(contact['name']),
                          "Contact deleted")
-        self.assertEqual(queries.delete_contact('Joe'), "No contact by the name Joe")
+        self.assertEqual(queries.delete_contact('Joe'),
+                         "No contact by the name Joe")
 
     def test_edit_contact(self):
         contact = {'name':'Bob', 'email': 'dkjslaf@hfkdjsa.com',
@@ -100,7 +102,7 @@ class testQueries(unittest.TestCase):
         self.assertFalse(queries.find_contact_by_name(None))
         self.assertFalse(queries.find_contact_by_name(""))
         queries.delete_contact('Marc')
-
+    
     def test_find_contact_by_phonenumber(self):
     	contact = {'name':'Marc', 'email':'dklf;ajsd@fjdkjsf.com',
                    'phone':'99999999999', 'address':''}
@@ -110,15 +112,16 @@ class testQueries(unittest.TestCase):
         queries.create_contact(contact)
         self.assertTrue(queries.find_contact_by_phoneNumber(contact['phone']))
         queries.delete_contact(contact['name'])
-
+    """
     def test_find_contact_by_email(self):
-        self.assertFalse(queries.find_contact_by_email(None))
-        self.assertFalse(queries.find_contact_by_email(""))
-        self.assertFalse(queries.find_contact_by_email(self.contacts['email']))
+        self.assertEqual(queries.find_contact_by_email(None), "Invalid input")
+        self.assertEqual(queries.find_contact_by_email(""), "Invalid input")
+        self.assertEqual(queries.find_contact_by_email(self.contacts['email']),
+                         "No contact with that email.")
         queries.create_contact(self.contacts)
         self.assertTrue(queries.find_contact_by_email(self.contacts['email']))
         queries.delete_contact(self.contacts['name'])
-
+    """
     def test_find_contacts_by_address(self):
         self.assertFalse(queries.find_contact_by_address(None))
         self.assertFalse(queries.find_contact_by_address(""))
