@@ -76,21 +76,22 @@ class testQueries(unittest.TestCase):
         self.assertEqual(queries.delete_contact(contact['name']),
                          "Contact deleted")
         self.assertEqual(queries.delete_contact('Joe'), "No contact by the name Joe")
-    """
+
     def test_edit_contact(self):
         contact = {'name':'Bob', 'email': 'dkjslaf@hfkdjsa.com',
                    'phone':'', 'address':''}
         queries.create_contact(contact)
-        self.assertFalse(queries.edit_contact(None))
-        self.assertFalse(queries.edit_contact(""))
-        contact['name'] = 'Bobby'
+        self.assertEqual(queries.edit_contact(None), "Invalid input")
+        self.assertEqual(queries.edit_contact(""), "Invalid input")
+        # what if name was changed
+        contact['phone'] = '99999999999'
         self.assertEqual(queries.edit_contact(contact),
                          "Contact has been edited.")
+        queries.delete_contact('Bob')
         contact['name'] = ""
         contact['email'] = ""
-        self.assertEqual(queries.edit_contact(contact), "Invalid entry")
-        queries.delete_contact('bob')
-
+        self.assertEqual(queries.edit_contact(contact), "No contact by that name")
+    """
     def test_find_contact_by_name(self):
         contact = {'name':'Marc', 'email':'jkflsfjhgjs@dsfjsdk.com',
                    'phone':'', 'address':''}

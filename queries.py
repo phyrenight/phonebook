@@ -82,9 +82,35 @@ def create_contact(contact):
             return "Invalid input"
 
 def edit_contact(contactName):
-    # if contactName:
-    #    try:
-    pass
+    if contactName != None and contactName !="":
+        print contactName['name']
+        try:
+            contact = session.query(Contact).filter_by(name = contactName['name']).one()
+            print contact
+            """if contactName['name'] != None and contactName['name'] != "":
+                contact.name = contactName['name']
+            if contactName['phone'] != None and contactName['phone'] != "":
+                contact.phone = contactName['phone']
+            if contactName['email'] != None and contactName['email'] != "":
+                contact.address = contactName['address']
+            session.update(contact)
+            session.commit()"""
+            return "Contact has been edited."
+        except:
+            return "No contact by that name"
+        """else:
+            if contactName['name'] != None or "":
+                contact.name = contactName['name']
+            if contactName['phone'] != None or "":
+                contact.phone = contactName['phone']
+            if contactName['email'] != None or "":
+                contact.address = contactName['address']
+            session.update(contact)
+            session.commit()
+            return "Contact edited"
+            """
+    else:
+        return "Invalid input"
 
 def delete_contact(contactName):
     if contactName != None:
