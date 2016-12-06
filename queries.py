@@ -127,11 +127,35 @@ def find_contact_by_email(emailAddress):
         return "Invalid input"
 
 def find_contact_by_address(address):
-    pass
+    if address:
+        try:
+            contactAddress = session.query(Contact).filter_by(address).all()
+        except:
+            return "No contact with that address."
+        else:
+            return contactAddress
+    else:
+        return "Invalid input"
 
-def find_contact_by_name(contact):
-    pass
+def find_contact_by_name(contactName):
+    if contactName:
+        try:
+            contact = session.query(Contact).filter_by(name = contactName).one()
+        except:
+            return "No contact named {}".format(contactName)
+        else:
+            return contact
+    else:
+        return "Invalid input"
 
-def find_contact_by_phoneNumber(phone):
-    pass
-
+def find_contact_by_phoneNumber(contactNumber):
+    if contactNumber:
+        try:
+            contact = session.query(Contact).filter_by(phone =
+                                                       contactNumber).all()
+        except:
+            return "No contact with {} as a number".format(contactNumber)
+        else:
+            return contact
+    else:
+        return "Invalid input"
