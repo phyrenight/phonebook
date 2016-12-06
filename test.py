@@ -66,17 +66,17 @@ class testQueries(unittest.TestCase):
         contact['name'] = "Bob"
         contact['email'] = "uiouepi@uoiupe"
         self.assertEqual(queries.create_contact(contact), "Contact created.")
-        delete_contact('Bob')
-    """
+        queries.delete_contact('Bob')
+
     def test_delete_contact(self):
-        contact = {'name':'Bob', 'phone':'99999999999'}
+        contact = {'name':'Bob', 'phone':'99999999999', 'email':'', 'address':''}
         queries.create_contact(contact)
     	self.assertTrue(queries.delete_contact(""))
-        self.assertEqual(queries.delete_contact(None))
+        self.assertEqual(queries.delete_contact(None), "Invalid input")
         self.assertEqual(queries.delete_contact(contact['name']),
                          "Contact deleted")
-        self.assertEqual(queries.delete_contact('Joe'), "Contact not found")
-
+        self.assertEqual(queries.delete_contact('Joe'), "No contact by the name Joe")
+    """
     def test_edit_contact(self):
         contact = {'name':'Bob', 'email': 'dkjslaf@hfkdjsa.com',
                    'phone':'', 'address':''}

@@ -21,8 +21,7 @@ def register_user(login):
                 session.add(newUser)
                 session.commit()
                 user = session.query(User).filter_by(name=login['name']).one()
-                print user
-                return user
+                return "User registered"
             else:
                 return "Username already in use."
         else:
@@ -65,7 +64,7 @@ def create_contact(contact):
     if contact != None:
         if contact['name']:
             try:
-                testContact = session.queries(Contact).filter_by(name = contact['name']).one()
+                testContact = session.query(Contact).filter_by(name = contact['name']).one()
             except:
                 newContact = Contact(name = contact['name'])
                 if contact['phone'] != "":
@@ -75,7 +74,7 @@ def create_contact(contact):
                 if contact['address'] != "":
                     newContact.address = contact['address']
                 session.add(newContact)
-                #session.commit()
+                session.commit()
                 return "Contact created."
             else:
                 return "Contact already exist."
@@ -88,7 +87,16 @@ def edit_contact(contactName):
     pass
 
 def delete_contact(contactName):
-    pass
+    if contactName != None:
+        try:
+            contact = session.query(Contact).filter_by(name = contactName).one()
+            session.delete(contact)
+            session.commit()
+            return "Contact deleted"
+        except:
+            return "No contact by the name {}".format(contactName)
+    else:
+        return "Invalid input"
 
 def get_users_contacts(user):
     pass
@@ -104,3 +112,4 @@ def find_contact_by_name(contact):
 
 def find_contact_by_phoneNumber(phone):
     pass
+
