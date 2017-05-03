@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width initial-scale=1.0" />
+    <meta name="author" content="Marc Preston" />
+    <meta name="description" content="" />
+    <title>Phonebook</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css')}}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}" />
+  </head>
+  <body>
+  
+  {% block content %}
+  {% endblock %}
+  <footer role="footer">
+    <nav role="navigation">
+      <ul>
+        <li><a href="">About Us</a></li>
+        </li><a href="">Legal</a></nav>
+      </ul>
+    </nav>
+  </footer>
+  </body>
+</html>

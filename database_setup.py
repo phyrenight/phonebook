@@ -8,8 +8,10 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
-    email = Column(String(250))  # should be unique
+    firstname = Column(String(250), nullable=False)
+    lastname = Column(String(250), nullable=False)
+    password = Column(String(20),nullable=False)
+    email = Column(String(250), nullable=False)  # should be unique
 
 class Contact(Base):
     __tablename__ = 'Contact'
