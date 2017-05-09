@@ -13,6 +13,14 @@ class User(Base):
     password = Column(String(20),nullable=False)
     email = Column(String(250), nullable=False)  # should be unique
 
+    def __init__(self, first_name, last_name, password, email):
+        print first_name.title()
+        self.firstname = first_name.title()
+        self.lastname = last_name.title()
+        self.password = password.title()
+        self.email = email.title()
+
+
 class Contact(Base):
     __tablename__ = 'Contact'
     contactId = Column(Integer, primary_key=True)
@@ -33,7 +41,8 @@ class Contact(Base):
         }
 
 
-#engine = create_engine('sqlite:///phonebook.db')
-#Base.metadata.bind = engine
-#DB = sessionmaker(bind=engine)
-#session = DB()
+engine = create_engine('sqlite:///phonebook.db')
+Base.metadata.bind = engine
+DB = sessionmaker(bind=engine)
+Base.metadata.create_all()
+session = DB()
