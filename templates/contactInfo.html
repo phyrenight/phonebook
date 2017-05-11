@@ -4,12 +4,12 @@
     <section class="content-container">
       <h2>Contact Info</h2>
       <div class="">
-        <p>Name: {{ contact.first_name }}{{ contact.last_name }}</p> 
+        <p>Name: {{ contact.name }}</p> 
         <p>Address: {{ contact.address }}</p>
-        <p>Phone number: {{ contact.phone_number }}</p>
+        <p>Phone number: {{ contact.phoneNumber }}</p>
         <p>Email: {{ contact.email }}</p>
-        <div class="EditContact"><a href="/EditContact{{ }}">Edit contact</a></div>
-        <div class="DeleteContact"><a href="/DeleteContact/{{ }}">Delete contact</a></div>
+        <div class="EditContact"><a href="{{ url_for('EditContact', contact=contact.contactId)}}">Edit contact</a></div>
+        <div class="DeleteContact"><a href="{{url_for('DeleteContact', contact=contact.contactId)}}">Delete contact</a></div>
       </div>
     </section>
   </main>

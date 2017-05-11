@@ -14,11 +14,11 @@ class User(Base):
     email = Column(String(250), nullable=False)  # should be unique
 
     def __init__(self, first_name, last_name, password, email):
-        print first_name.title()
-        self.firstname = first_name.title()
-        self.lastname = last_name.title()
-        self.password = password.title()
-        self.email = email.title()
+        print first_name
+        self.firstname = first_name
+        self.lastname = last_name
+        self.password = password
+        self.email = email
 
 
 class Contact(Base):

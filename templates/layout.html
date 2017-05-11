@@ -4,13 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width initial-scale=1.0" />
     <meta name="author" content="Marc Preston" />
-    <meta name="description" content="" />
+    <meta name="keyword" content="personal backup phonebook"
+    <meta name="description" content="A site to store phone numbers" />
     <title>Phonebook</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css')}}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}" />
   </head>
   <body>
-  
+    <header role="banner">
+      <h1>PhoneBook</h1>
+    </header>
   {% block content %}
   {% endblock %}
   <footer role="footer">
