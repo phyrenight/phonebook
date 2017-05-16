@@ -105,20 +105,20 @@ def DeleteContact(contact):
     if 'email' not in session:
         return redirect(url_for('Login'))
     form = ContactForm()
-    #if request.method == 'GET':
     contactDetails = db_session.query(Contact).filter_by(contactId=contact).first()
-    form.first_name.content = contactDetails.name
-    form.last_name.content = contactDetails.name
-    form.phone_number.content = contactDetails.phoneNumber
-    form.email.content = contactDetails.email
-    form.address.content = contactDetails.address
-     #   return render_template('deletecontact.html', form=form)
-    print "KKKKKKK"
+    if request.method == 'GET':
+        return render_template('deletecontact.html', contact=contactDetails)
     if request.method == 'POST':
-        contactDetails = db_session.query(Contact).filter_by(contactId=contact).first()
-        db_session.delete(contactDetails)
-        db_session.commit()
-        return redirect(url_for('Contacts'))
+        useremail = db_session.query(User).filter_by(id=contactDetails.UserId).first()
+        if useremail.email == session['email']:
+            contactDetails = db_session.query(Contact).filter_by(contactId=contact).first()
+            db_session.delete(contactDetails)
+            db_session.commit()
+            flash("Contact has been deleted.")
+            return redirect(url_for('Contacts'))
+        else:
+            flash("You are not the owner of this contact")
+            return redirect(url_for('Login'))
 
 @app.route('/editcontact/<contact>', methods=['GET', 'POST'])
 def EditContact(contact):
@@ -135,7 +135,6 @@ def EditContact(contact):
                 contactDetail.address = form.email.data 
             if form.phone_number.data != contactDetail.phoneNumber:
                 contactDetail.phoneNumber = form.phone_number.data
-           # db_session.(contactDetail)
             db_session.commit()
             flash("Contact has been updated.")
             return redirect(url_for('Contacts'))
