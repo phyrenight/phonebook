@@ -5,7 +5,9 @@
     <h2>Delete Contact</h2>
     <div class="">
       <p> Are you sure you want to delete {{ contact.name }} from your contacts?</p>
-      <div class="delete-contact"><a href="">Delete contact</a></div><div class="cancel-Deletion"><a href="">Cancel</a></div>
+      <form action="/deletecontact/{{ contact.contactId }}" method='POST'>
+      <button>Delete contact</button>
+      </form><div class="cancel-Deletion"><a href="{{  url_for('ContactDetails', contact=contact.contactId)}}">Cancel</a></div>
     </div>
   </section>
   </main>

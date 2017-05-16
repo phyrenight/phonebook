@@ -3,36 +3,37 @@
   <main role="main">
     <section class="content-container">
       <h2>Edit contact</h2>
-      <form method="POST" action="/EditContact/{{ contact.id }}">
+      <form method="POST" action="/editcontact/{{ contact.contactId }}">
         {{ form.hidden_tag() }}
 
         <div class="form-group">
-          {{ form.first_name.label }}
-          {{ form.first_name }}
+        <label>Name:
+        <input type="text" name="name" value="{{ contact.name }}">
+         </label>
         </div>
 
         <div class="form-group">
           {{ form.last_name.label }}
-          {{ form.last_name }}
+          {{ form.last_name(value=form.last_name.content) }}
         </div>
 
         <div class="form-group">
           {{ form.email.label }}
-          {{ form.email }}
+          {{ form.email(value=form.email.content) }}
         </div>
 
         <div class="form-group">
           {{ form.phone_number.label }}
-          {{ form.phone_number }}
+          {{ form.phone_number(value= form.phone_number.content) }}
         </div>
 
         <div class="form-group">
           {{ form.address.label }}
-          {{ form.address }}
+          {{ form.address(value=form.address.content) }}
         </div>
 
-        {{ form.submit(class="") }}
-
+        {{ form.submit }}
+      </form>
     </section>
   </main>
 {% endblock %}

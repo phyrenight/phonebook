@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for
+from flask import flash
 from forms import SignUpForm, LoginForm, ContactForm
 from database_setup import User, Contact, session as db_session
 
@@ -18,13 +19,18 @@ def SignUp():
     form = SignUpForm()
     if request.method == 'POST':
         if form.validate() == False:
+            flash("please fill out the form completely")
             return render_template('Signup.html', form=form)
         else:
-            users = User( form.first_name.data, form.last_name.data, form.password.data, form.email.data)
-            db_session.add(users)
-            db_session.commit()
-            session['email'] = form.email.data
-            return redirect(url_for('home'))
+            if  not rdb_session.query(User).filter_by(email=form.email.data).first():
+                flash("Password already in use")
+                return render_template('Signup.html', form=form)
+            else:
+                users = User( form.first_name.data, form.last_name.data, form.password.data, form.email.data)
+             #   db_session.add(users)
+              #  db_session.commit()
+               # session['email'] = form.email.data
+                return redirect(url_for('home'))
     elif request.method == 'GET':
         return render_template('Signup.html', form=form)
 
@@ -94,26 +100,57 @@ def ContactDetails(contact):
         contactDetails = db_session.query(Contact).filter_by(contactId=contact).first()
         return render_template('contactInfo.html', contact=contactDetails)
 
-@app.route('/deletecontact/<contact>')
+@app.route('/deletecontact/<contact>', methods=['GET', 'POST'])
 def DeleteContact(contact):
     if 'email' not in session:
         return redirect(url_for('Login'))
-
-    elif request.method == 'GET':
+    form = ContactForm()
+    #if request.method == 'GET':
+    contactDetails = db_session.query(Contact).filter_by(contactId=contact).first()
+    form.first_name.content = contactDetails.name
+    form.last_name.content = contactDetails.name
+    form.phone_number.content = contactDetails.phoneNumber
+    form.email.content = contactDetails.email
+    form.address.content = contactDetails.address
+     #   return render_template('deletecontact.html', form=form)
+    print "KKKKKKK"
+    if request.method == 'POST':
         contactDetails = db_session.query(Contact).filter_by(contactId=contact).first()
-        return render_template('deletecontact.html',contact=contactDetails)
+        db_session.delete(contactDetails)
+        db_session.commit()
+        return redirect(url_for('Contacts'))
 
-@app.route('/editcontact/<contact>')
+@app.route('/editcontact/<contact>', methods=['GET', 'POST'])
 def EditContact(contact):
     if 'email' not in session:
         return redirect(url_for('Login'))
     form = ContactForm()
-    if request.method == 'GET':
-        contactDetail = db_session.query(Contact).filter_by(contactId=contact).first()
-        print contactDetail.name
+    contactDetail = db_session.query(Contact).filter_by(contactId=contact).first()
+    if request.method == 'POST':
+        useremail = db_session.query(User).filter_by(id=contactDetail.UserId).first()
+        if useremail.email == session['email']:
+            if form.email.data != contactDetail.email:
+                contactDetail.email = form.email.data
+            if form.address.data != contactDetail.address:
+                contactDetail.address = form.email.data 
+            if form.phone_number.data != contactDetail.phoneNumber:
+                contactDetail.phoneNumber = form.phone_number.data
+           # db_session.(contactDetail)
+            db_session.commit()
+            flash("Contact has been updated.")
+            return redirect(url_for('Contacts'))
+        else:
+            flash("This is not your account")
+            return redirect(url_for('Contacts'))
+
+    elif request.method == 'GET':
+        form.first_name.content = contactDetail.name
+        form.last_name.content = contactDetail.name
+        form.phone_number.content = contactDetail.phoneNumber
+        form.email.content = contactDetail.email
+        form.address.content = contactDetail.address
         return render_template('editcontact.html', contact=contactDetail, form=form)
-    elif request.method == 'POST':
-        return redirect(url_for('Contacts'))
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
