@@ -13,6 +13,11 @@
   <body>
     <header role="banner">
       <h1>PhoneBook</h1>
+      {% if  session['email'] %}
+        <a href="{{ url_for('Logout')}}">{{ session['email'] }}</a>
+      {% else %}
+        <p>else</p>
+      {% endif %}
     </header>
     {% block content %}
     {% endblock %}

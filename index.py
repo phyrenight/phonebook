@@ -149,7 +149,16 @@ def EditContact(contact):
         form.email.content = contactDetail.email
         form.address.content = contactDetail.address
         return render_template('editcontact.html', contact=contactDetail, form=form)
-    
+
+@app.route('/logout')
+def Logout():
+    if 'email' in session:
+        session.clear()
+        flash("You have been logged out.")
+        return redirect(url_for('home'))
+    else:
+        flash("You are not logged in.")
+        return render_template('home.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,10 +1,22 @@
 {% extends "layout.html" %}
   {% block content %}
+  <div id="crumbs-container">
+    <p>Home</p>
+  </div>
   <main role="main">
     <section class="content-container">
       <h2>Home</h2>
         <div class="">
           <p> Welcome to My PhoneBook</p>
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          {% endwith %}
         </div>
     </section>
   </main>

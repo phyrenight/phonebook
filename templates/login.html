@@ -1,8 +1,21 @@
 {% extends "layout.html" %}
   {% block content %}
+  <div id="crumbs-container">
+    <a href="{{ url_for('home')}}">Home/</a>
+    <p>login</p>
+  </div>
     <main role="main">
       <section>
         <h2>Login</h2>
+        {% with messages  = get_flash_messages() %}
+          {% if messages %}
+            <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
         <form method="POST" action="/login">
           {{ form.hidden_tag() }}
           <div class="form-group">
