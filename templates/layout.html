@@ -4,11 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width initial-scale=1.0" />
     <meta name="author" content="Marc Preston" />
-    <meta name="keyword" content="personal backup phonebook"
+    <meta name="keyword" content="personal backup phonebook" />
     <meta name="description" content="A site to store phone numbers" />
     <title>Phonebook</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css')}}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}" />
+   <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css?q=00')}}" />-->
+  <link rel="stylesheet" href="static/css/styles.css?q=000000016" />
   </head>
   <body>
     <header role="banner">
@@ -16,16 +17,18 @@
       {% if  session['email'] %}
         <a href="{{ url_for('Logout')}}">{{ session['email'] }}</a>
       {% else %}
-        <p>else</p>
+        <a href="{{ url_for('Login') }}">Login</a>
+        <a href="{{ url_for('SignUp') }}">Signup</a>
       {% endif %}
     </header>
     {% block content %}
     {% endblock %}
+
   <footer role="footer">
     <nav role="navigation">
       <ul>
         <li><a href="#">About Us</a></li>
-        </li><a href="#">Legal</a></nav>
+        <li><a href="#">Legal</a></li>
       </ul>
     </nav>
   </footer>

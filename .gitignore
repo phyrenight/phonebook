@@ -1,1 +1,4 @@
 env
+.sass-cache
+styles.css.map
+styles.sass
