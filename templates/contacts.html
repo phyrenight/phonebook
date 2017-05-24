@@ -16,15 +16,16 @@
         </ul>
       {% endif %}
     {% endwith %}
-    <div class="">
+    <div class="contacts-container">
      {%  for contact in contacts %}
-      <div class="">
+      <div class="contact-container">
         <p><a href="{{ url_for('ContactDetails', contact=contact.contactId)}}">
           <span>{{ contact.name }}</span>
+          </a>
           <span>{{ contact.address }}</span>
           <span>{{ contact.phoneNumber}}</span>
           <span>{{ contact.email }}</span>
-        </a></p>
+        </p>
       </div>
      {% endfor %}
     </div>
