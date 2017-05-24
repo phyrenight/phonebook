@@ -14,7 +14,7 @@ def home():
 @app.route("/signup", methods=['GET', 'POST'])
 def SignUp():
     if 'email' in session:
-        return redirect(url_for('home'))
+        return redirect(url_for('Contacts'))
 
     form = SignUpForm()
     if request.method == 'POST':
@@ -30,14 +30,14 @@ def SignUp():
              #   db_session.add(users)
               #  db_session.commit()
                # session['email'] = form.email.data
-                return redirect(url_for('home'))
+                return redirect(url_for('Contacts'))
     elif request.method == 'GET':
         return render_template('Signup.html', form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
 def Login():
     if 'email' in session:
-        return redirect(url_for('home'))
+        return redirect(url_for('Contacts'))
     form = LoginForm()
     if request.method == 'POST':
         if form.validate() == False:
@@ -49,7 +49,7 @@ def Login():
             user = db_session.query(User).filter_by(email=email).first()
             if user is not None and (user.password == password):
                 session['email'] = form.email.data
-                return redirect(url_for('home'))
+                return redirect(url_for('Contacts'))
             else:
                 return redirect(url_for('Login'))
     elif request.method == 'GET':

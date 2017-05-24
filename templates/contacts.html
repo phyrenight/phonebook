@@ -27,7 +27,10 @@
           <span>{{ contact.email }}</span>
         </p>
       </div>
-     {% endfor %}
+      {% endfor %}
+      <div class="options-container">
+        <a href="{{ url_for('NewContact')}}">Create new contact</a>
+      </div>
     </div>
   </section>
   </main>
