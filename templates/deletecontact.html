@@ -8,11 +8,14 @@
   <main role="main">
   <section class="content-container">
     <h2>Delete Contact</h2>
-    <div class="">
+    <div class="container">
       <p> Are you sure you want to delete {{ contact.name }} from your contacts?</p>
       <form action="/deletecontact/{{ contact.contactId }}" method='POST'>
-      <button>Delete contact</button>
-      </form><div class="cancel-Deletion"><a href="{{  url_for('ContactDetails', contact=contact.contactId)}}">Cancel</a></div>
+        <button>Delete contact</button>
+        <div class="cancel-Deletion">
+          <a href="{{  url_for('ContactDetails', contact=contact.contactId)}}">Cancel</a>
+        </div>
+      </form>
     </div>
   </section>
   </main>
