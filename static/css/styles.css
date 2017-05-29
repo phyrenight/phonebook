@@ -15,7 +15,10 @@ header {
     margin: 0%; }
 
 main {
-  margin: 20% auto; }
+  margin: 8% 0% auto;
+  height: 60%; }
+  main .content-container {
+    height: 100%; }
   main section {
     width: 80%;
     margin: auto;
@@ -30,14 +33,28 @@ main {
   main div {
     margin: auto;
     width: 90%; }
-  main .contact-container, main .options-container, main .button-container {
-    text-align: center; }
-  main .form-group {
-    text-align: center; }
+  main .form-container {
+    text-align: center;
+    width: 200px; }
+  main form {
+    text-align: left; }
   main .button {
     margin-top: 2%; }
+  main .contacts-container {
+    border: 1px solid black;
+    height: 70%;
+    overflow-y: scroll; }
+    main .contacts-container .contact-container {
+      text-align: left; }
+    main .contacts-container span {
+      display: block; }
+  main .container, main .contact-container {
+    text-align: center; }
+  main .EditContact, main .DeleteContact, main .DeleteButton {
+    display: inline-block; }
 
-nav {
+footer {
+  border-top: 1px solid black;
   width: 100%;
   text-align: center;
   position: absolute;

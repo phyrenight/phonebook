@@ -6,7 +6,7 @@
   </div>
   <main role="main">
   <section class="content-container">
-    <h2>Phone Book</h2>
+    <h2>Contacts</h2>
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul>
@@ -19,19 +19,16 @@
     <div class="contacts-container">
      {%  for contact in contacts %}
       <div class="contact-container">
-        <p><a href="{{ url_for('ContactDetails', contact=contact.contactId)}}">
+        <a href="{{ url_for('ContactDetails', contact=contact.contactId)}}">
           <span>{{ contact.name }}</span>
           </a>
-          <span>{{ contact.address }}</span>
-          <span>{{ contact.phoneNumber}}</span>
-          <span>{{ contact.email }}</span>
-        </p>
+
       </div>
       {% endfor %}
+    </div>
       <div class="options-container">
         <a href="{{ url_for('NewContact')}}">Create new contact</a>
       </div>
-    </div>
   </section>
   </main>
 {% endblock %}
