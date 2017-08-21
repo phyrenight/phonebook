@@ -160,5 +160,13 @@ def Logout():
         flash("You are not logged in.")
         return render_template('home.html')
 
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template("internalerror.html")
+
+@app.errorhandler(404)
+def file_not_found(error):
+    return render_template('error404.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
