@@ -2,8 +2,10 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from flask import flash
 from forms import SignUpForm, LoginForm, ContactForm
 from database_setup import User, Contact, session as db_session
+from flask.ext.bcrypt import Bcrypt
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 
 app.secret_key = "development-key"
 
@@ -23,11 +25,16 @@ def SignUp():
             flash("please fill out the form completely")
             return render_template('Signup.html', form=form)
         else:
-            if  not rdb_session.query(User).filter_by(email=form.email.data).first():
-                flash("Password already in use")
+            if  not db_session.query(User).filter_by(email=form.email.data).first():
+                flash("Email already in use")
                 return render_template('Signup.html', form=form)
             else:
+
                 users = User( form.first_name.data, form.last_name.data, form.password.data, form.email.data)
+                pw_hash = bcrypt.generate_password_hash(form.password.data)
+                print pw_hash
+                print form.password.data
+                print bcrypt.check.password_hash(pw_hash, 'aaaaaa')
              #   db_session.add(users)
               #  db_session.commit()
                # session['email'] = form.email.data

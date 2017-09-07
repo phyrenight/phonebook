@@ -7,6 +7,15 @@
 <main role="main">
   <section id="login">
     <h2>Sign up</h2>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
     <div class="form-container">
       <form method="POST" action="/signup">
         {{ form.hidden_tag() }}  

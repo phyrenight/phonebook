@@ -1,12 +1,20 @@
 """
     Test cases for phoneBook queries
 """
+
+import os
+
 import queries
 import unittest
+import index
+
+print index.home
 
 
 class testQueries(unittest.TestCase):
     """ Test for queries.py"""
+
+
 
     contacts = {'name':'Marc', 'email':'dklf;ajsd@fjdkjsf.com',
                'phone':'99999999999', 'address':'123 east never never land'}
