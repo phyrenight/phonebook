@@ -25,19 +25,18 @@ def SignUp():
             flash("please fill out the form completely")
             return render_template('Signup.html', form=form)
         else:
-            if  not db_session.query(User).filter_by(email=form.email.data).first():
+            if db_session.query(User).filter_by(email=form.email.data).first():
                 flash("Email already in use")
                 return render_template('Signup.html', form=form)
             else:
-
-                users = User( form.first_name.data, form.last_name.data, form.password.data, form.email.data)
                 pw_hash = bcrypt.generate_password_hash(form.password.data)
+                users = User( form.first_name.data, form.last_name.data, pw_hash, form.email.data)
                 print pw_hash
                 print form.password.data
-                print bcrypt.check.password_hash(pw_hash, 'aaaaaa')
-             #   db_session.add(users)
-              #  db_session.commit()
-               # session['email'] = form.email.data
+                print bcrypt.check_password_hash(pw_hash, 'aaaaaa')
+                db_session.add(users)
+                db_session.commit()
+                session['email'] = form.email.data
                 return redirect(url_for('Contacts'))
     elif request.method == 'GET':
         return render_template('Signup.html', form=form)
