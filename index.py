@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask import flash
-from forms import SignUpForm, LoginForm, ContactForm
+from forms import SignUpForm, LoginForm, ContactForm, RequestPasswordReset
 from database_setup import User, Contact, session as db_session
 from flask.ext.bcrypt import Bcrypt
 
@@ -31,9 +31,6 @@ def SignUp():
             else:
                 pw_hash = bcrypt.generate_password_hash(form.password.data)
                 users = User( form.first_name.data, form.last_name.data, pw_hash, form.email.data)
-                print pw_hash
-                print form.password.data
-                print bcrypt.check_password_hash(pw_hash, 'aaaaaa')
                 db_session.add(users)
                 db_session.commit()
                 session['email'] = form.email.data
@@ -54,13 +51,18 @@ def Login():
             password = form.password.data
 
             user = db_session.query(User).filter_by(email=email).first()
-            if user is not None and (user.password == password):
+            if user is not None and bcrypt.check_password_hash(user.password, password):
                 session['email'] = form.email.data
                 return redirect(url_for('Contacts'))
             else:
                 return redirect(url_for('Login'))
     elif request.method == 'GET':
         return render_template('login.html', form=LoginForm())
+
+@app.route("/resetpassword")
+def resetPassword():
+    form = 
+    return render_template('resetpassword.html', form=form)
 
 @app.route("/newcontact", methods=['GET', 'POST'])
 def NewContact():
