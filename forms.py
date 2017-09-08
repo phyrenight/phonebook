@@ -44,7 +44,7 @@ class ContactForm(FlaskForm):
    submit = SubmitField('Submit contact')
 
 class RequestPasswordReset(FlaskForm):
-    email = StringField('email',
+    email = StringField('Enter your email address',
                          validators=[DataRequired
                          ("Please enter your email address.")], render_kw={"placeholder": "email@email.com"})
     submit = SubmitField('Submit request')

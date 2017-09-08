@@ -3,3 +3,4 @@ env
 styles.css.map
 styles.sass
 **/node_modules
+config.py

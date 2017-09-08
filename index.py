@@ -3,15 +3,28 @@ from flask import flash
 from forms import SignUpForm, LoginForm, ContactForm, RequestPasswordReset
 from database_setup import User, Contact, session as db_session
 from flask.ext.bcrypt import Bcrypt
-
+from flask_mail import Mail, Message
+from config import mail_server, mail_port, mail_username, mail_password
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
+app.config['MAIL_SERVER'] = mail_server
+app.config['MAIL_PORT'] = mail_port
+app.config['MAIL_USERNAME'] = mail_username
+app.config['MAIL_PASSWORD'] = mail_password
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
 app.secret_key = "development-key"
+
+mail = Mail(app)
 
 @app.route("/")
 @app.route("/home")
 def home():
+    msg = Message('Hello', sender=mail_username, recipients = ['preston9@comcast.net'])
+    msg.body = "hello Flask message sent from Flask-Mail"
+    mail.send(msg)
     return render_template('home.html')
 
 @app.route("/signup", methods=['GET', 'POST'])
