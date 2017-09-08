@@ -57,11 +57,13 @@ def Login():
             else:
                 return redirect(url_for('Login'))
     elif request.method == 'GET':
-        return render_template('login.html', form=LoginForm())
+        return render_template('login.html', form=form)
 
 @app.route("/resetpassword")
 def resetPassword():
-    form = 
+    if 'email' in session:
+        return redirect(url_for('home'))
+    form = RequestPasswordReset()
     return render_template('resetpassword.html', form=form)
 
 @app.route("/newcontact", methods=['GET', 'POST'])

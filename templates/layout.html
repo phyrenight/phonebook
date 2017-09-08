@@ -15,7 +15,7 @@
     <header role="banner">
       <h1>PhoneBook</h1>
       {% if  session['email'] %}
-        <a href="{{ url_for('Logout')}}">{{ session['email'] }}</a>
+        <a href="{{ url_for('Logout')}}">{{ session['email'] }}(logout)</a>
       {% else %}
         <a href="{{ url_for('Login') }}">Login</a>
         <a href="{{ url_for('SignUp') }}">Signup</a>
