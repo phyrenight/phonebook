@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div id="crumb-container">
+    <a href="{{ url_for('home')}}">home</a><span>/</span>
+  </div>
+  <main role="main">
+    <section>
+      <h2>Email sent</h2>
+      <div class="content-container">
+        <p>Password
+        reset has been sent.</p>
+      </div>
+    </section>
+  </main>
+{% endblock %}

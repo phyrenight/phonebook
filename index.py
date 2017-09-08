@@ -73,12 +73,16 @@ def resetPassword():
         else:
             user = db_session.query(User).filter_by(email=form.email.data).first()
             if user is not None:
-                return redirect(url_for('emailSent'))
+                return redirect(url_for('EmailSent'))
             else:
                 flash("Email not in database")
                 return redirect(url_for('resetPassword'))
     elif request.method == 'GET':
         return render_template('resetpassword.html', form=form)
+
+@app.route("/emailsent")
+def EmailSent():
+    return render_template('emailsent.html')
 
 @app.route("/newcontact", methods=['GET', 'POST'])
 def NewContact():
