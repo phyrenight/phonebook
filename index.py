@@ -59,12 +59,26 @@ def Login():
     elif request.method == 'GET':
         return render_template('login.html', form=form)
 
-@app.route("/resetpassword")
+@app.route("/resetpassword", methods=['GET', 'POST'])
 def resetPassword():
     if 'email' in session:
         return redirect(url_for('home'))
     form = RequestPasswordReset()
-    return render_template('resetpassword.html', form=form)
+    
+    if request.method == 'POST':
+        print form.email.data
+        if form.validate() == False:
+            flash("Please enter a valid email.")
+            return render_template('resetpassword.html', form=form)
+        else:
+            user = db_session.query(User).filter_by(email=form.email.data).first()
+            if user is not None:
+                return redirect(url_for('emailSent'))
+            else:
+                flash("Email not in database")
+                return redirect(url_for('resetPassword'))
+    elif request.method == 'GET':
+        return render_template('resetpassword.html', form=form)
 
 @app.route("/newcontact", methods=['GET', 'POST'])
 def NewContact():
