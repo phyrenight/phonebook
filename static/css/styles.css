@@ -15,7 +15,7 @@ header {
     margin: 0%; }
 
 main {
-  margin: auto;
+  margin: 8% auto;
   height: 60%; }
   main .content-container {
     height: 100%; }
@@ -23,7 +23,7 @@ main {
     width: 80%;
     margin: auto;
     box-shadow: 0 0 10px black;
-    padding: 5px 0px; }
+    padding: 15px 0px; }
   main h2 {
     margin-top: 0%;
     margin-left: 3px; }
@@ -41,9 +41,8 @@ main {
   main .button {
     margin-top: 2%; }
   main .contacts-container {
-    border: 1px solid black;
     height: 70%;
-    overflow-y: scroll; }
+    overflow-y: hidden; }
     main .contacts-container .contact-container {
       text-align: left; }
     main .contacts-container span {
@@ -65,5 +64,10 @@ ul {
   padding: 0%; }
   ul li {
     display: inline-block; }
+
+@media (min-width: 700px) {
+  main {
+    margin: 35px auto;
+    height: 350px; } }
 
 /*# sourceMappingURL=styles.css.map */
