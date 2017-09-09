@@ -130,7 +130,7 @@ def NewContact():
     elif request.method == 'GET':
         return render_template('newcontact.html', form=form)
 
-@app.route("/changepassword" methods=['GET', 'POST'])
+@app.route("/changepassword", methods=['GET', 'POST'])
 def ChangePass():   
     if 'email' in session:
         return redirect(url_for('home'))

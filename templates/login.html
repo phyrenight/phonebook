@@ -6,7 +6,9 @@
   </div>
     <main role="main">
       <section>
-        <h2>Login</h2>
+        <div>
+          <h2>Login</h2>
+        </div>
         {% with messages  = get_flashed_messages() %}
           {% if messages %}
             <ul>
@@ -30,7 +32,9 @@
             <div>
               {{ form.submit(class="button")}}
             </div>
-            <a href="{{ url_for('resetPassword') }}">Reset password</a>
+            <div>
+              <a href="{{ url_for('resetPassword') }}">Reset password</a>
+            </div>
           </form>
         </div>
       </section>

@@ -15,7 +15,7 @@ header {
     margin: 0%; }
 
 main {
-  margin: 8% 0% auto;
+  margin: auto;
   height: 60%; }
   main .content-container {
     height: 100%; }
