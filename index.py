@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask import flash
 from forms import SignUpForm, LoginForm, ContactForm, RequestPasswordReset
+from forms import ChangePassword
 from database_setup import User, Contact, session as db_session
 from flask.ext.bcrypt import Bcrypt
 from flask_mail import Mail, Message
 from config import mail_server, mail_port, mail_username, mail_password
+
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
@@ -88,7 +90,7 @@ def resetPassword():
             if user is not None:
                 print form.email.data
                 msg = Message('Password reset', sender=mail_username, recipients=[form.email.data])
-                msg.body = 'http://localhost:5000'
+                msg.body = 'http://localhost:5000/changepassword'
                 mail.send(msg)
                 return redirect(url_for('EmailSent'))
             else:
@@ -127,6 +129,29 @@ def NewContact():
             return redirect(url_for('Contacts'))
     elif request.method == 'GET':
         return render_template('newcontact.html', form=form)
+
+@app.route("/changepassword" methods=['GET', 'POST'])
+def ChangePass():   
+    if 'email' in session:
+        return redirect(url_for('home'))
+    form = ChangePassword()
+    if request.method == 'POST':
+        if form.validate() == False:
+            return render_template('changepassword.html', form=form)
+        else:
+            user = db_session.query(User).filter_by(email= form.email.data).first()
+            if user is not None:
+                ps_hash = bcrypt.generate_password_hash(form.password.data)
+                user.password = ps_hash
+                db_session.commit()
+                return redirect(url_for('Login'))
+            else:
+                flash("User not in database.")
+                return render_template('changepassword.html', form=form)
+
+    elif request.method == 'GET':
+        return render_template('changepassword.html', form=form)
+
 
 @app.route("/contacts")
 def Contacts():

@@ -48,3 +48,12 @@ class RequestPasswordReset(FlaskForm):
                          validators=[DataRequired
                          ("Please enter your email address.")], render_kw={"placeholder": "email@email.com"})
     submit = SubmitField('Submit request')
+
+class ChangePassword(FlaskForm):
+    email = Stringfield('Email',
+                      validators=[DataRequired
+                      ("Please enter your email.")], render_kw={"placeholder": "email@email.com"})
+    password = StringField('Password',
+                          validators=[DataRequired
+                          ("Please enter a new password")])
+    submit = SubmitField('Submit')
