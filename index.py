@@ -86,6 +86,10 @@ def resetPassword():
         else:
             user = db_session.query(User).filter_by(email=form.email.data).first()
             if user is not None:
+                print form.email.data
+                msg = Message('Password reset', sender=mail_username, recipients=[form.email.data])
+                msg.body = 'http://localhost:5000'
+                mail.send(msg)
                 return redirect(url_for('EmailSent'))
             else:
                 flash("Email not in database")
