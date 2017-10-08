@@ -3,7 +3,7 @@ A online phone book user can save their contacts on.
 
 
 ## Installation
-download the repo
+Download  or clone the repository.
 
 ## Requirements
   * python 2.7
