@@ -52,6 +52,8 @@ def SignUp():
 
 @app.route("/login", methods=['GET', 'POST'])
 def Login():
+    """ 
+    """
     if 'email' in session:
         return redirect(url_for('Contacts'))
     form = LoginForm()
@@ -227,6 +229,10 @@ def Logout():
     else:
         flash("You are not logged in.")
         return render_template('home.html')
+
+@app.route('/legal')
+def Legal():
+    return render_template('legal.html')
 
 @app.errorhandler(500)
 def internal_error(error):

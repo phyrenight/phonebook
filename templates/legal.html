@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+  {% block content %}
+    <div id="crumb-container">
+      <a href="{{ url_for('home') }}">Home</a>
+      <span> / </span>
+      <p>Legal stuff</p>
+    </div>
+    <main role="main">
+      <section id="legal">
+        <h2>Legal Stuff</h2>
+        <p> This is not a real site it is a sample project.</p>
+      </section>
+    </main>
+  {% endblock %}
