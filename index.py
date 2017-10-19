@@ -24,9 +24,6 @@ mail = Mail(app)
 @app.route("/")
 @app.route("/home")
 def home():
-    msg = Message('Hello', sender=mail_username, recipients = ['preston9@comcast.net'])
-    msg.body = "hello Flask message sent from Flask-Mail"
-    mail.send(msg)
     return render_template('home.html')
 
 @app.route("/signup", methods=['GET', 'POST'])

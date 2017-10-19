@@ -6,3 +6,4 @@ styles.sass
 config.py
 config.pyc
 *.pyc
+venv
