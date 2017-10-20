@@ -6,6 +6,14 @@ from sqlalchemy import create_engine, ForeignKeyConstraint
 Base = declarative_base()
 
 class User(Base):
+    """Contains User information.
+
+    :param int id: Unique id for the user
+    :param str firstname: user's first name
+    :param str lastname: user's last name
+    :param str password: user's password
+    :param str email: user's valid email
+    """
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
     firstname = Column(String(250), nullable=False)
@@ -22,6 +30,15 @@ class User(Base):
 
 
 class Contact(Base):
+    """Contains info on each contact.
+
+    :param int contactId: unique id for the contact
+    :param int userId: unique key that is taken from the User table
+    :param str name: name of the contact
+    :param str phoneNumber: contact's phone number
+    :param str address: contact's physical address
+    :param str email: contact's valid email address 
+    """
     __tablename__ = 'Contact'
     contactId = Column(Integer, primary_key=True)
     UserId = Column(Integer, ForeignKey('user.id')) #
