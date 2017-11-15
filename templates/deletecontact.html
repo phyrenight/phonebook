@@ -2,7 +2,7 @@
 {% block content %}
   <div id="crumb-container">
     <a href="{{ url_for('home') }}">Home</a><span>/</span>
-    <a href="{{ url_for('Contacts') }}">Contacts</a><span>/</span>
+    <a href="{{ url_for('contacts') }}">Contacts</a><span>/</span>
     <p>Delete Contact</p>
   </div>
   <main role="main">
@@ -13,7 +13,7 @@
       <form action="/deletecontact/{{ contact.contactId }}" method='POST'>
         <button class="DeleteButton">Delete contact</button>
         <div class="cancel-Deletion">
-          <a href="{{  url_for('ContactDetails', contact=contact.contactId)}}">Cancel</a>
+          <a href="{{  url_for('contact_details', contact=contact.contactId)}}">Cancel</a>
         </div>
       </form>
     </div>

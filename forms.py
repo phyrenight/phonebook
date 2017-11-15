@@ -5,40 +5,40 @@ from wtforms.validators import DataRequired, Email, Length
 class SignUpForm(FlaskForm):
     first_name = StringField('First name',
                              validators=[DataRequired
-                             ("Please enter your first name")])
+                             ('Please enter your first name')])
     last_name = StringField('Last name', 
                             validators=
-                                       [DataRequired("Please enter your last name")])
+                                       [DataRequired('Please enter your last name')])
     email = StringField('Email',
                          validators=
-                                     [DataRequired("Please enter your email address"), Email("Please enter a valid email address")])
+                                     [DataRequired('Please enter your email address'), Email('Please enter a valid email address')])
     password = PasswordField('Password',
                               validators=[DataRequired
-                              ("Please enter a password"),
+                              ('Please enter a password'),
                                Length(min=6, 
-                               message="Password must be at least 6 characters long")])
+                               message='Password must be at least 6 characters long')])
     submit = SubmitField('Sign up')
 
 class LoginForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired
-                        ("Please enter your email address"),
-                         Email("Please enter a valid email")])
+                        ('Please enter your email address'),
+                         Email('Please enter a valid email')])
     password = PasswordField('Password',
                              validators=[DataRequired
-                             ("Please enter your password")])
+                             ('Please enter your password')])
     submit = SubmitField('Sign in')
 
 class ContactForm(FlaskForm):
    first_name = StringField('First name',
                              validators=[DataRequired
-                             ("Please enter a first name for this contact")])
-   last_name = StringField('Last name', validators=[DataRequired("Please enter a last name for this contact")])
+                             ('Please enter a first name for this contact')])
+   last_name = StringField('Last name', validators=[DataRequired('Please enter a last name for this contact')])
    phone_number = StringField('Phone number',
                                validators=[DataRequired
-                               ("Please enter a phone number"),
+                               ('Please enter a phone number'),
                                 Length(min=6,
-                                 message="Please enter a valid phone number")])
+                                 message='Please enter a valid phone number')])
    email = StringField('Email')
    address = StringField('Address')
    submit = SubmitField('Submit contact')
@@ -46,13 +46,13 @@ class ContactForm(FlaskForm):
 class RequestPasswordReset(FlaskForm):
     email = StringField('Enter your email address',
                          validators=[DataRequired
-                         ("Please enter your email address.")], render_kw={"placeholder": "email@email.com"})
+                         ('Please enter your email address.')], render_kw={'placeholder': 'email@email.com'})
     submit = SubmitField('Submit request')
 
 class ChangePassword(FlaskForm):
     email = StringField('Email',
                       validators=[DataRequired
-                      ("Please enter your email.")], render_kw={"placeholder": "email@email.com"})
+                      ('Please enter your email.')], render_kw={"placeholder": "email@email.com"})
     password = StringField('Password',
                           validators=[DataRequired
                           ("Please enter a new password")])

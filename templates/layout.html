@@ -15,10 +15,10 @@
     <header role="banner">
       <h1>PhoneBook</h1>
       {% if  session['email'] %}
-        <a href="{{ url_for('Logout')}}">{{ session['email'] }}(logout)</a>
+        <a href="{{ url_for('logout')}}">{{ session['email'] }}(logout)</a>
       {% else %}
-        <a href="{{ url_for('Login') }}">Login</a>
-        <a href="{{ url_for('SignUp') }}">Signup</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('sign_up') }}">Signup</a>
       {% endif %}
     </header>
     {% block content %}
@@ -28,7 +28,7 @@
     <nav role="navigation">
       <ul>
         <li><a href="#">About Us</a></li>
-        <li><a href="{{ url_for('Legal') }}">Legal</a></li>
+        <li><a href="{{ url_for('legal') }}">Legal</a></li>
       </ul>
     </nav>
   </footer>

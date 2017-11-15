@@ -19,7 +19,7 @@
     <div class="contacts-container">
      {%  for contact in contacts %}
       <div class="contact-container">
-        <a href="{{ url_for('ContactDetails', contact=contact.contactId)}}">
+        <a href="{{ url_for('contact_details', contact=contact.contactId)}}">
           <span>{{ contact.name }}</span>
           </a>
 
@@ -27,7 +27,7 @@
       {% endfor %}
     </div>
       <div class="options-container">
-        <a href="{{ url_for('NewContact')}}">Create new contact</a>
+        <a href="{{ url_for('new_contact')}}">Create new contact</a>
       </div>
   </section>
   </main>
